@@ -1,0 +1,16 @@
+---
+const { title, subtitle, summary, links = [], image } = Astro.props;
+---
+<article class="project-card">
+  {image ? <img src={image} alt={`${title} figure`} /> : null}
+  <h3 class="project-title">{title}</h3>
+  {subtitle ? <p class="project-subtitle">{subtitle}</p> : null}
+  {summary ? <p class="project-summary">{summary}</p> : null}
+  {links.length ? (
+    <p class="project-links">
+      {links.map(link => (
+        <a href={link.href} class="meta-link" rel="noopener" target="_blank">{link.label}</a>
+      ))}
+    </p>
+  ) : null}
+</article>

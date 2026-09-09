@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Impact of Algorithm Choice — Upasana Sridhar" description="Comparing the performance of three mathematically equivalent matrix-multiplication algorithms.">
+  <article class="container section article-page">
+    <p class="article-back"><a href="/writing">← Writing</a></p>
+    <h1 class="section-heading">Impact of Algorithm Choice</h1>
+    <p class="post-date article-date">September 1, 2020</p>
+    <p class="tag-list article-tags"><span class="tag">Algorithms</span><span class="tag">Performance</span></p>
+    <p>This page tests three variants of matrix–matrix multiplication and reports their execution times below.</p>
+    <p>All three algorithms implement the same specification. Consider two matrices, A and B, with dimensions <em>M × K</em> and <em>K × N</em>, respectively. Their product, C, is computed by multiplying and adding the elements in each row of A with the elements in each column of B, producing <em>M × N</em> values.</p>
+    <p>This gives us the familiar loop structure:</p>
+    <pre><code>{`for (i = 0; i < M; i++)
+  for (j = 0; j < N; j++)
+    for (k = 0; k < K; k++)
+      C[i][j] += A[i][k] * B[k][j]`}</code></pre>
+    <p>Changing the order of these loops does not change the final result. The three variants below come from reordering the loops while leaving the update statement unchanged.</p>
+    <ol class="algorithm-variants">
+      <li>
+        <strong>Fully update — textbook algorithm</strong><br />
+        Loop order: <code>i, j, k</code><br />
+        Each element of C is fully computed before the algorithm moves to another element. Assuming row-major storage for A and B, accesses to A are sequential while accesses to B are strided.
+      </li>
+      <li>
+        <strong>Fully update — loops switched</strong><br />
+        Loop order: <code>j, i, k</code><br />
+        Each element of C is again fully computed before the algorithm moves on. Assuming row-major storage, accesses to B are sequential while accesses to A are strided.
+      </li>
+      <li>
+        <strong>Partial update</strong><br />
+        Loop order: <code>k, i, j</code><br />
+        Each element of C is only partially computed before the algorithm moves to the next element. Assuming row-major storage, accesses to A and B are sequential in the innermost loop.
+      </li>
+    </ol>
+
+    <section class="algorithm-demo" aria-labelledby="demo-heading">
+      <h2 id="demo-heading">Test the variants</h2>
+      <p><em>Are the results what you expect? Think about why the execution times may differ even though the variants are mathematically equivalent.</em></p>
+      <button class="demo-button" id="run-algorithm-demo" type="button">Test run</button>
+      <span class="demo-status" id="algorithm-demo-status" aria-live="polite"></span>
+      <p><small>Timings vary by browser and machine. Run the test a few times to get a sense of the average behavior.</small></p>
+
+      <div class="demo-results" id="algorithm-demo-results" hidden>
+        <table class="timing-table">
+          <thead><tr><th>Loop order</th><th>Execution time</th><th>Speedup</th></tr></thead>
+          <tbody>
+            <tr><td><code>i, j, k</code></td><td id="timing-ijk">—</td><td>1.00×</td></tr>
+            <tr><td><code>j, i, k</code></td><td id="timing-jik">—</td><td id="speedup-jik">—</td></tr>
+            <tr><td><code>k, i, j</code></td><td id="timing-kij">—</td><td id="speedup-kij">—</td></tr>
+          </tbody>
+        </table>
+        <div class="speed-chart" aria-label="Speedup relative to textbook loop ordering">
+          <p class="chart-title">Speedup relative to <code>i, j, k</code> <small>(higher is better)</small></p>
+          <div class="chart-row"><code>i,j,k</code><span class="chart-track"><span class="chart-bar" id="bar-ijk"></span></span></div>
+          <div class="chart-row"><code>j,i,k</code><span class="chart-track"><span class="chart-bar" id="bar-jik"></span></span></div>
+          <div class="chart-row"><code>k,i,j</code><span class="chart-track"><span class="chart-bar" id="bar-kij"></span></span></div>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<script>
+  const size = 192;
+  const runButton = document.querySelector<HTMLButtonElement>('#run-algorithm-demo');
+  const status = document.querySelector<HTMLElement>('#algorithm-demo-status');
+  const results = document.querySelector<HTMLElement>('#algorithm-demo-results');
+
+  function multiply(order: 'ijk' | 'jik' | 'kij', a: Float64Array, b: Float64Array) {
+    const c = new Float64Array(size * size);
+    const start = performance.now();
+
+    if (order === 'ijk') {
+      for (let i = 0; i < size; i++) for (let j = 0; j < size; j++) for (let k = 0; k < size; k++)
+        c[i * size + j] += a[i * size + k] * b[k * size + j];
+    } else if (order === 'jik') {
+      for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) for (let k = 0; k < size; k++)
+        c[i * size + j] += a[i * size + k] * b[k * size + j];
+    } else {
+      for (let k = 0; k < size; k++) for (let i = 0; i < size; i++) for (let j = 0; j < size; j++)
+        c[i * size + j] += a[i * size + k] * b[k * size + j];
+    }
+    return performance.now() - start;
+  }
+
+  runButton?.addEventListener('click', () => {
+    runButton.disabled = true;
+    if (status) status.textContent = 'Running…';
+
+    requestAnimationFrame(() => setTimeout(() => {
+      const a = new Float64Array(size * size);
+      const b = new Float64Array(size * size);
+      for (let index = 0; index < a.length; index++) {
+        a[index] = Math.random();
+        b[index] = Math.random();
+      }
+
+      const timings = {
+        ijk: multiply('ijk', a, b),
+        jik: multiply('jik', a, b),
+        kij: multiply('kij', a, b)
+      };
+      const speedups = { ijk: 1, jik: timings.ijk / timings.jik, kij: timings.ijk / timings.kij };
+      const maximum = Math.max(...Object.values(speedups));
+
+      (document.querySelector('#timing-ijk') as HTMLElement).textContent = `${timings.ijk.toFixed(1)} ms`;
+      (document.querySelector('#timing-jik') as HTMLElement).textContent = `${timings.jik.toFixed(1)} ms`;
+      (document.querySelector('#timing-kij') as HTMLElement).textContent = `${timings.kij.toFixed(1)} ms`;
+      (document.querySelector('#speedup-jik') as HTMLElement).textContent = `${speedups.jik.toFixed(2)}×`;
+      (document.querySelector('#speedup-kij') as HTMLElement).textContent = `${speedups.kij.toFixed(2)}×`;
+
+      for (const order of ['ijk', 'jik', 'kij'] as const) {
+        const bar = document.querySelector<HTMLElement>(`#bar-${order}`);
+        if (bar) {
+          bar.style.width = `${Math.max(4, speedups[order] / maximum * 100)}%`;
+          bar.textContent = `${speedups[order].toFixed(2)}×`;
+        }
+      }
+      if (results) results.hidden = false;
+      if (status) status.textContent = 'Complete.';
+      runButton.disabled = false;
+    }, 20));
+  });
+</script>

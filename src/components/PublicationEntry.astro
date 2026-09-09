@@ -1,0 +1,19 @@
+---
+const { title, authors, venue, year, summary, links = [] } = Astro.props;
+const authorParts = authors.split('Upasana Sridhar');
+---
+<article class="publication-entry">
+  <h3 class="pub-title">{title}</h3>
+  <p class="pub-meta">
+    {authorParts.map((part, index) => <>{part}{index < authorParts.length - 1 ? <strong>Upasana Sridhar</strong> : null}</>)}
+    <span class="sep"> • </span><em>{venue}</em>, {year}
+  </p>
+  {summary ? <p class="pub-summary">{summary}</p> : null}
+  {links.length ? (
+    <p class="pub-links">
+      {links.map(l => (
+        <a href={l.href} target="_blank" rel="noopener" class="meta-link">{l.label}</a>
+      ))}
+    </p>
+  ) : null}
+</article>

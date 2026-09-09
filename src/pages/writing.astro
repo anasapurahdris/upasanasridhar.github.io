@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const meta = {
+  title: 'Writing — Upasana Sridhar',
+  description: 'Essays, course projects, technical investigations, and exploratory writing by Upasana Sridhar.'
+};
+
+type WritingEntry = {
+  title: string;
+  description: string;
+  date?: string;
+  year?: string;
+  sortDate?: string;
+  course?: string;
+  tags: string[];
+  href?: string;
+  pdf?: string;
+  note?: string;
+};
+
+const entries: WritingEntry[] = [
+  {
+    title: 'Lab Tales 2023',
+    description: 'Reflections on communicating research simply and clearly from the Lab Tales workshop at Princeton.',
+    date: 'July 31, 2023',
+    year: '2023',
+    sortDate: '2023-07-31',
+    href: '/writing/lab-tales-2023',
+    tags: ['Research Life']
+  },
+  {
+    title: 'TinyML Asia 2020: My Takeaways',
+    description: 'Takeaways on hardware–software co-design, efficient inference, and emerging applications from the TinyML Asia Summit.',
+    date: 'November 20, 2020',
+    year: '2020',
+    sortDate: '2020-11-20',
+    href: '/writing/tinyml-asia-2020',
+    tags: ['Hardware-Software Co-design', 'Performance Engineering / Performance Trade-offs']
+  },
+  {
+    title: 'Impact of Algorithm Choice',
+    description: 'An interactive comparison of three mathematically equivalent matrix-multiplication loop orderings and their performance.',
+    date: 'September 1, 2020',
+    year: '2020',
+    sortDate: '2020-09-01',
+    href: '/writing/impact-of-algorithm-choice',
+    tags: ['Performance Engineering / Performance Trade-offs']
+  },
+  {
+    title: 'Graph Analytics for Hardware-Aware Microservice Colocation',
+    description: 'Explored graph-based repartitioning of microservice call graphs to co-locate hot request paths and reduce high-overhead RPC communication through hardware-aware service placement.',
+    date: 'April 2022',
+    year: '2022',
+    sortDate: '2022-04-01',
+    tags: ['Course Project', 'Hardware-Software Co-design', 'Performance Engineering / Performance Trade-offs']
+  },
+  {
+    title: 'Processing-in-Memory Architectures for Sparse Graph Workloads',
+    description: 'Studied the architecture/workload fit of processing-in-memory systems for sparse graph analytics, focusing on irregular memory access, limited locality, and workload structure.',
+    date: 'April 2020',
+    year: '2020',
+    sortDate: '2020-04-01',
+    tags: ['Course Project', 'Hardware-Software Co-design', 'Performance Engineering / Performance Trade-offs']
+  },
+  {
+    title: 'Computer Architects and System-Level Programmers: A Historical Review',
+    description: 'Reviewed the evolving relationship between computer architects and system-level programmers, focusing on how abstraction boundaries, hardware visibility, and software responsibility have shaped performance engineering.',
+    date: 'March 2020',
+    year: '2020',
+    sortDate: '2020-03-01',
+    tags: ['Course Project', 'Performance Engineering / Performance Trade-offs']
+  },
+  {
+    title: 'A Call to Action for a Practical Quantum Internet',
+    description: 'Developed a position-style project examining the gap between theoretical quantum-networking protocols and the systems infrastructure required to build a practical quantum internet.',
+    date: 'December 2021',
+    year: '2021',
+    sortDate: '2021-12-01',
+    tags: ['Course Project', 'Hardware-Software Co-design']
+  },
+  {
+    title: 'The Silk Road Symbol Exchange',
+    description: 'An essay examining the role of the Silk Routes in the exchange and transformation of artistic symbols and visual culture across Eurasia.',
+    date: 'December 2022',
+    year: '2022',
+    sortDate: '2022-12-01',
+    tags: ['Course Project', 'Art History']
+  },
+  {
+    title: 'Cli-Fi in the Visual Arts',
+    description: 'An essay exploring climate-centered science fiction in visual culture, from dystopian futures to more hopeful traditions such as solarpunk.',
+    date: 'April 2023',
+    year: '2023',
+    sortDate: '2023-04-01',
+    tags: ['Course Project', 'Art History']
+  }
+];
+
+const visibleEntries = entries
+  .filter((entry) => entry.href || entry.pdf)
+  .sort((a, b) => (b.sortDate ?? '').localeCompare(a.sortDate ?? ''));
+const tags = [...new Set(visibleEntries.flatMap((entry) => entry.tags))].sort((a, b) => a.localeCompare(b));
+---
+<BaseLayout title={meta.title} description={meta.description}>
+  <section class="container section writing-page">
+    <h1 class="section-heading">Writing</h1>
+    <p class="intro">This page collects essays, course projects, technical investigations, and other writing that sit alongside my primary research. Some are exploratory, some are interdisciplinary, and some are simply questions I found interesting enough to pursue.</p>
+
+    <div class="writing-filters" aria-label="Filter writing by tag">
+      <button class="filter-tag is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+      {tags.map((tag) => <button class="filter-tag" type="button" data-filter={tag} aria-pressed="false">{tag}</button>)}
+    </div>
+    <p class="filter-status" id="writing-filter-status" aria-live="polite"></p>
+
+    <div class="blog-list">
+      {visibleEntries.map((entry) => (
+        <article class="blog-entry writing-entry" data-tags={JSON.stringify(entry.tags)}>
+          <div class="blog-entry-copy">
+            <h2>{entry.href ? <a href={entry.href}>{entry.title}</a> : entry.title}</h2>
+            {(entry.date || entry.year || entry.course) && (
+              <p class="post-date">{[entry.date ?? entry.year, entry.course].filter(Boolean).join(' · ')}</p>
+            )}
+            <p class="writing-description">{entry.description}</p>
+            {(entry.href || entry.pdf) && (
+              <p class="writing-links">
+                {entry.href && <a href={entry.href}>Read writeup</a>}
+                {entry.href && entry.pdf && <span aria-hidden="true"> · </span>}
+                {entry.pdf && <a href={entry.pdf}>View course paper</a>}
+              </p>
+            )}
+            {entry.note && <p class="writing-note">{entry.note}</p>}
+          </div>
+          <div class="tag-list" aria-label="Topics">
+            {entry.tags.map((tag) => <button class="tag entry-tag" type="button" data-filter={tag}>{tag}</button>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const entries = [...document.querySelectorAll<HTMLElement>('.writing-entry')];
+  const controls = [...document.querySelectorAll<HTMLButtonElement>('.filter-tag')];
+  const entryTags = [...document.querySelectorAll<HTMLButtonElement>('.entry-tag')];
+  const status = document.querySelector<HTMLElement>('#writing-filter-status');
+
+  function applyFilter(filter: string) {
+    let visible = 0;
+    entries.forEach((entry) => {
+      const tags = JSON.parse(entry.dataset.tags ?? '[]') as string[];
+      const show = filter === 'all' || tags.includes(filter);
+      entry.hidden = !show;
+      if (show) visible++;
+    });
+    controls.forEach((control) => {
+      const active = control.dataset.filter === filter;
+      control.classList.toggle('is-active', active);
+      control.setAttribute('aria-pressed', String(active));
+    });
+    if (status) status.textContent = filter === 'all' ? `${visible} entries` : `${visible} ${visible === 1 ? 'entry' : 'entries'} tagged “${filter}”`;
+  }
+
+  controls.forEach((control) => control.addEventListener('click', () => applyFilter(control.dataset.filter ?? 'all')));
+  entryTags.forEach((control) => control.addEventListener('click', () => {
+    const filter = control.dataset.filter ?? 'all';
+    applyFilter(filter);
+    document.querySelector('.writing-filters')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  applyFilter('all');
+</script>

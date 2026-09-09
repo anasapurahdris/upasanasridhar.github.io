@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const meta = { title: 'Teaching — Upasana Sridhar', description: 'Courses, guest lectures, mentoring, and teaching development.' };
+---
+<BaseLayout title={meta.title} description={meta.description}>
+  <section class="container section">
+    <h1 class="section-heading">Teaching</h1>
+    <p class="intro"> My teaching experience spans computer science introductions, high-performance computing and scientific computing. I strongly believe that good learning environments come from having a "just-hard-enough" challenge and an empowering classroom. You can read how I try to inculcate this environment in my teaching statement.</p>
+
+    <h2>Courses and instruction</h2>
+    <div class="teaching-list">
+      <article class="teaching-entry">
+        <div>
+          <h3>How to Write Fast Code II</h3>
+          <p class="teaching-role">Guest instructor · Carnegie Mellon University</p>
+          <p>Guest instructor in Fall 2020 and Fall 2021; mentor and subject-matter expert for course projects in Fall 2022 and Fall 2023.</p>
+          <p class="teaching-topics"><strong>Guest lectures:</strong> “Task-Based Parallelism” (Spring 2024), “Introduction to GPU Architecture” (Spring 2026), and “Introduction to GPU Programming” (Spring 2026).</p>
+        </div>
+        <p class="teaching-date">2020–2026</p>
+      </article>
+
+      <article class="teaching-entry">
+        <div>
+          <h3>Computational Problem Solving for Engineers</h3>
+          <p class="teaching-role">Teaching assistant · Carnegie Mellon University</p>
+          <p class="teaching-topics"><strong>Guest lecture:</strong> “Designing Portable Libraries.”</p>
+        </div>
+        <p class="teaching-date">Spring 2025</p>
+      </article>
+
+      <article class="teaching-entry">
+        <div>
+          <h3>How to Write Fast Code I</h3>
+          <p class="teaching-role">Teaching assistant · Carnegie Mellon University</p>
+          <p>Teaching assistant in Fall 2020 and Fall 2021; mentor and subject-matter expert for course projects in Fall 2022 and Fall 2023.</p>
+          <p class="teaching-topics"><strong>Guest lectures:</strong> “Introduction to SIMD” (Fall 2022) and “Kernel-Design Crash Course” (Fall 2023).</p>
+        </div>
+        <p class="teaching-date">2020–2023</p>
+      </article>
+
+      <article class="teaching-entry">
+        <div>
+          <h3>Advanced Algorithms</h3>
+          <p class="teaching-role">Teaching assistant · Project-based course · PES University </p>
+        </div>
+        <p class="teaching-date">Fall 2018</p>
+      </article>
+
+      <article class="teaching-entry">
+        <div>
+          <h3>Nature of Code</h3>
+          <p class="teaching-role">Instructor · Student-taught course · PES University</p>
+        </div>
+        <p class="teaching-date">Jan–Mar 2018</p>
+      </article>
+    </div>
+
+    <h2>Teaching development</h2>
+    <ul class="training-list">
+      <li><span>Future Faculty Program, CMU Eberly Center</span><time>Spring 2026</time></li>
+      <li><span>Evidence-Based Teaching in STEM, Carnegie Mellon University</span><time>Spring 2024</time></li>
+      <li><span>Teaching as Research Institute, CMU Eberly Center</span><time>2022</time></li>
+    </ul>
+      <div class="teaching-influences">
+      <h2>Teaching influences</h2>
+      <p>A few writers and teachers have shaped how I think about teaching in CS.</p>
+      <ul class="teaching-influences-list">
+        <li>From <a href="https://archive.org/details/disciplineofprog0000dijk" target="_blank" rel="noopener noreferrer">Edsger Dijkstra’s <em>A Discipline of Programming</em></a>, I take the idea that correctness—and, in my own work, performance—should be reasoned about through design rather than recovered after implementation.</li>
+        <li><a href="https://doi.org/10.1145/1118178.1118215" target="_blank" rel="noopener noreferrer">Jeannette Wing’s “Computational Thinking”</a> shaped how I think about computing as the broader skill of formulating problems so that humans and machines can participate in solving them.</li>
+        <li>From <a href="https://archive.org/details/knittingwithoutt00zimm" target="_blank" rel="noopener noreferrer">Elizabeth Zimmermann’s <em>Knitting Without Tears</em></a>, I take the importance of giving learners enough understanding to stop following recipes blindly and begin making informed choices of their own.</li>
+        <li><a href="https://www.bloomsbury.com/us/pedagogy-of-the-oppressed-9781501314155/" target="_blank" rel="noopener noreferrer">Paulo Freire’s <em>Pedagogy of the Oppressed</em></a> gave me the idea of education as preparation to engage with a world that is “not as a static reality, but as a reality in process, in transformation.”</li>
+        <li><a href="https://www.routledge.com/Teaching-to-Transgress-Education-as-the-Practice-of-Freedom/hooks/p/book/9780415908085" target="_blank" rel="noopener noreferrer">bell hooks’ <em>Teaching to Transgress</em></a> gave me language for the classrooms in which I have learned best: intellectually demanding, participatory spaces where learning is something the class does together.</li>
+      </ul>
+    </div>
+
+  </section>
+</BaseLayout>

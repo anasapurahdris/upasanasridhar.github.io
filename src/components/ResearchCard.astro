@@ -1,0 +1,12 @@
+---
+const { title, question, bullets = [] } = Astro.props;
+---
+<section class="research-card">
+  <h4 class="research-title">{title}</h4>
+  <p class="research-question"><strong>Question:</strong> {question}</p>
+  {bullets.length ? (
+    <ul class="research-bullets">
+      {bullets.map(b => <li>{b}</li>)}
+    </ul>
+  ) : null}
+</section>

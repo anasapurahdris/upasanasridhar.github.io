@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const meta = {
+  title: 'Upasana Sridhar — Making performance engineering systematic, reusable, and accessible',
+  description: 'Research portfolio: high-performance computing, programming languages, Performance Portability.'
+};
+---
+<BaseLayout title={meta.title} description={meta.description} pageClass="home-page">
+  <div class="container academic-page">
+    <aside class="job-market-note">
+      <strong>I am currently on the academic job market!</strong> 
+    </aside>
+
+    <section class="bio">
+      <div class="bio-copy">
+        <h1 class="profile-name"><span>Upasana</span><span>Sridhar</span></h1>
+        <p class="position">Final-year PhD Candidate<br />Electrical and Computer Engineering<br />Carnegie Mellon University</p>
+        <p class="bio-links"><a href="/CV_Upasana_Spring26%20(17).pdf">CV</a> · <a href="mailto:upasanas@cmu.edu">Email</a> · <a href="https://scholar.google.com/scholar?q=Upasana+Sridhar" target="_blank" rel="noopener noreferrer">Google Scholar</a></p>
+      </div>
+      <figure class="profile-photo">
+        <img src="/profile.jpg" alt="Upasana Sridhar standing in front of a mountain landscape" />
+      </figure>
+      <div class="bio-description">
+        <p>I am a final-year PhD candidate in Electrical and Computer Engineering at Carnegie Mellon University, advised by <a href="https://users.ece.cmu.edu/~lowt/" target="_blank" rel="noopener noreferrer">Professor Tze Meng Low</a>.</p>
+        <p>My vision is for efficient code to be accessible for every workload and computing device. I believe that the way to this future is by making performance engineering <strong>systematic, reusable, and accessible</strong>.</p>
+        <p><strong>Systematic:</strong> I discover new ways to write efficient code as the landscape of what we compute and where changes. My work has explored this question across graph algorithms, radar digital signal processing, and <a href="/projects/composable-operators">machine learning systems</a>.</p>
+        <p><strong>Reusable:</strong> I <a href="/projects/transformations">distill efficient designs into performance patterns</a> by identifying salient architectural features and mapping them to parameters in the patterns. <a href="/projects/small">SMaLL</a>, for example, captures reusable structure for building architecture-specialized machine learning libraries.</p>
+        <p><strong>Accessible:</strong> I ask how we can bring performance expertise to the most people. Building on the distilled systems from my prior work, I <a href="https://dblp.org/rec/conf/ipps/SridharBL25" target="_blank" rel="noopener noreferrer">work with large language models</a> to productively generate highly specialized code.</p>
+        <p>My research interests broadly lie at the intersection of high-performance computing, programming models, machine learning systems, and, in the future, human-computer interaction.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>If you are interested in research collaborations or opportunities, please email me at <a href="mailto:upasanas@cmu.edu">upasanas at cmu dot edu</a>.</p>
+    </section>
+  </div>
+</BaseLayout>
