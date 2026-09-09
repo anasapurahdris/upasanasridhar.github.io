@@ -5,6 +5,8 @@ const meta = {
   title: 'Writing — Upasana Sridhar',
   description: 'Essays, course projects, technical investigations, and exploratory writing by Upasana Sridhar.'
 };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sitePath = (path: string) => `${base}${path}`;
 
 type WritingEntry = {
   title: string;
@@ -26,7 +28,7 @@ const entries: WritingEntry[] = [
     date: 'July 31, 2023',
     year: '2023',
     sortDate: '2023-07-31',
-    href: '/writing/lab-tales-2023',
+    href: sitePath('/writing/lab-tales-2023'),
     tags: ['Research Life']
   },
   {
@@ -35,7 +37,7 @@ const entries: WritingEntry[] = [
     date: 'November 20, 2020',
     year: '2020',
     sortDate: '2020-11-20',
-    href: '/writing/tinyml-asia-2020',
+    href: sitePath('/writing/tinyml-asia-2020'),
     tags: ['Hardware-Software Co-design', 'Performance Engineering / Performance Trade-offs']
   },
   {
@@ -44,7 +46,7 @@ const entries: WritingEntry[] = [
     date: 'September 1, 2020',
     year: '2020',
     sortDate: '2020-09-01',
-    href: '/writing/impact-of-algorithm-choice',
+    href: sitePath('/writing/impact-of-algorithm-choice'),
     tags: ['Performance Engineering / Performance Trade-offs']
   },
   {

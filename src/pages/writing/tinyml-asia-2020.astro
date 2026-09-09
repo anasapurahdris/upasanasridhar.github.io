@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title="TinyML Asia 2020 — Upasana Sridhar" description="Takeaways from the TinyML Asia Summit in November 2020.">
   <article class="container section article-page">
-    <p class="article-back"><a href="/writing">← Writing</a></p>
+    <p class="article-back"><a href={`${base}/writing`}>← Writing</a></p>
     <h1 class="section-heading">TinyML Asia 2020: My Takeaways</h1>
     <p class="post-date article-date">November 20, 2020</p>
     <p class="tag-list article-tags"><span class="tag">TinyML</span><span class="tag">Conference notes</span></p>

@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title="Lab Tales 2023 — Upasana Sridhar" description="Reflections from the Lab Tales workshop at Princeton.">
   <article class="container section article-page">
-    <p class="article-back"><a href="/writing">← Writing</a></p>
+    <p class="article-back"><a href={`${base}/writing`}>← Writing</a></p>
     <h1 class="section-heading">Lab Tales 2023</h1>
     <p class="post-date article-date">July 31, 2023</p>
     <p class="tag-list article-tags"><span class="tag">Research life</span></p>

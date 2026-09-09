@@ -1,13 +1,15 @@
 ---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sitePath = (path: string) => `${base}${path}`;
 ---
 <header class="site-header">
   <div class="container header-inner">
     <nav aria-label="Primary" class="primary-nav">
       <ul>
-        <li><a class="brand" href="/">Upasana Sridhar</a></li>
-        <li><a href="/teaching">Teaching</a></li>
-        <li><a href="/writing">Writing</a></li>
-        <li><a href="/CV_Upasana_Spring26%20(17).pdf">CV</a></li>
+        <li><a class="brand" href={sitePath('/')}>Upasana Sridhar</a></li>
+        <li><a href={sitePath('/teaching')}>Teaching</a></li>
+        <li><a href={sitePath('/writing')}>Writing</a></li>
+        <li><a href={sitePath('/CV_Upasana_Spring26%20(17).pdf')}>CV</a></li>
       </ul>
     </nav>
   </div>
