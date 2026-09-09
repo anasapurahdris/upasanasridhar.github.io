@@ -94,10 +94,14 @@ li { margin-bottom: 5px; }
 .teaching-entry h3 { margin: 0 0 4px; font-size: 18px; }
 .teaching-entry p { margin: 5px 0; }
 .teaching-role, .teaching-date { color: var(--muted); }
+.teaching-entry .teaching-role { margin-top: 12px; }
+.teaching-entry h3 + .teaching-role { margin-top: 5px; }
 .teaching-date { margin-top: 1px !important; white-space: nowrap; font-size: 14px; }
 .teaching-topics { font-size: 15px; }
 .training-list { max-width: 850px; margin: 8px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
 .training-list li { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.training-list li > div { max-width: 700px; }
+.training-list p { margin: 6px 0 0; font-size: 15px; }
 .training-list time { color: var(--muted); white-space: nowrap; }
 .publication-entry, .project-card, .research-card, .idea-card { margin: 0 0 20px; }
 .publication-entry { max-width: 850px; }
