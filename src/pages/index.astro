@@ -4,6 +4,7 @@ const meta = {
   title: 'Upasana Sridhar — Making performance engineering systematic, reusable, and accessible',
   description: 'Research portfolio: high-performance computing, programming languages, Performance Portability.'
 };
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <BaseLayout title={meta.title} description={meta.description} pageClass="home-page">
   <div class="container academic-page">
@@ -18,7 +19,7 @@ const meta = {
         <p class="bio-links"><a href="/CV_Upasana_Spring26%20(17).pdf">CV</a> · <a href="mailto:upasanas@cmu.edu">Email</a> · <a href="https://scholar.google.com/scholar?q=Upasana+Sridhar" target="_blank" rel="noopener noreferrer">Google Scholar</a></p>
       </div>
       <figure class="profile-photo">
-        <img src="/profile.jpg" alt="Upasana Sridhar standing in front of a mountain landscape" />
+        <img src={`${base}/profile.jpg`} alt="Upasana Sridhar standing in front of a mountain landscape" />
       </figure>
       <div class="bio-description">
         <p>I am a final-year PhD candidate in Electrical and Computer Engineering at Carnegie Mellon University, advised by <a href="https://users.ece.cmu.edu/~lowt/" target="_blank" rel="noopener noreferrer">Professor Tze Meng Low</a>.</p>
