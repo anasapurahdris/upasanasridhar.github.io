@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PublicationEntry from '../components/PublicationEntry.astro';
+
+// Publication details transcribed from the CV in public/.
+const topics = [
+  {
+    id: 'graph-algorithms',
+    title: 'Provably Correct, High-Performance Graph Algorithms',
+    papers: [
+      {
+        title: 'Linear Algebra Approach for Directed Triad Counting and Enumeration',
+        authors: 'Yuttapichai Kerdcharoen, Upasana Sridhar, Orathai Sangpetch, and Tze Meng Low',
+        venue: 'SC24 Workshops', year: 2024,
+      },
+      {
+        title: 'Linear Algebraic Depth-First Search',
+        authors: 'Daniele G. Spampinato, Upasana Sridhar, and Tze Meng Low',
+        venue: 'ACM SIGPLAN ARRAY Workshop', year: 2019,
+      },
+      {
+        title: 'Delta-Stepping SSSP: From Vertices and Edges to GraphBLAS Implementations',
+        authors: 'Upasana Sridhar, Maia P. Blanco, Rahul Mayuranath, Daniele G. Spampinato, Tze Meng Low, and Scott McMillan',
+        venue: 'IEEE IPDPS Workshops', year: 2019,
+      },
+      {
+        title: 'Linear Algebraic Formulation of Edge-Centric k-Truss Algorithms with Adjacency Matrices',
+        authors: 'Tze Meng Low, Daniele G. Spampinato, Anurag Kutuluru, Upasana Sridhar, Doru Thom Popovici, Franz Franchetti, and Scott McMillan',
+        venue: 'IEEE High Performance Extreme Computing Conference (HPEC)', year: 2018,
+      },
+    ],
+  },
+  {
+    id: 'abstractions',
+    title: 'Abstractions and Their Performance Penalties',
+    papers: [
+      {
+        title: 'Exploiting Fusion Opportunities in Linear Algebraic Graph Query Engines',
+        authors: 'Yuttapichai Kerdcharoen, Upasana Sridhar, and Tze Meng Low',
+        venue: 'IEEE High Performance Extreme Computing Conference (HPEC)', year: 2023,
+      },
+      {
+        title: 'Zoom Out: Abstractions for Efficient Radar Algorithms on COTS Architectures',
+        authors: 'Tze Meng Low, Yuejie Chi, James C. Hoe, Swarun Kumar, Akarsh Prabhakara, Laixi Shi, Upasana Sridhar, Nicolai Tukanov, Chengyue Wang, and Yuchen Wu',
+        venue: 'IEEE International Symposium on Phased Array Systems & Technology (PAST)', year: 2022,
+      },
+      {
+        title: 'Fusing Non Element-wise Layers in DNNs',
+        authors: 'Upasana Sridhar, Tze Meng Low, and Martin D. Schatz',
+        venue: 'IEEE High Performance Extreme Computing Conference (HPEC)', year: 2021,
+      },
+      {
+        title: 'Evaluation of Graph Analytics Frameworks Using the GAP Benchmark Suite',
+        authors: 'Ariful Azad, Mohsen Mahmoudi Aznaveh, Scott Beamer, Maia P. Blanco, Jinhao Chen, Luke D’Alessandro, Roshan Dathathri, Tim Davis, Kevin Deweese, Jesun Firoz, Upasana Sridhar, Tze Meng Low, and Martin D. Schatz',
+        venue: 'IEEE International Symposium on Workload Characterization (IISWC)', year: 2020,
+      },
+    ],
+  },
+  {
+    id: 'portable-libraries',
+    title: 'Portable Performance Libraries',
+    papers: [
+      {
+        title: 'Gen-AI in a Bottle: Experiments with LLMs to Generate HPC Kernels',
+        authors: 'Upasana Sridhar, Elliott Binder, and Tze Meng Low',
+        venue: 'IEEE IPDPS Workshops (IPDPSW)', year: 2025,
+      },
+      {
+        title: 'SMaLL: Software for Rapidly Instantiating Machine Learning Libraries',
+        authors: 'Upasana Sridhar, Nicholai Tukanov, Elliott Binder, Tze Meng Low, Scott McMillan, and Martin D. Schatz',
+        venue: 'ACM Transactions on Embedded Computing Systems (TECS)', year: 2024,
+      },
+      {
+        title: 'Reformulating the Direct Convolution for High-Performance Deep Learning Inference on ARM Processors',
+        authors: 'Sergio Barrachina, Adrián Castelló, Manuel F. Dolz, Tze Meng Low, Héctor Martínez, Enrique S. Quintana-Ortí, Upasana Sridhar, and Andrés E. Tomás',
+        venue: 'Journal of Systems Architecture (JSA)', year: 2023,
+      },
+    ],
+  },
+];
+---
+<BaseLayout title="Research — Upasana Sridhar" description="Papers on provably correct graph algorithms, the performance of abstractions, and portable performance libraries.">
+  <div class="container section">
+    <h1 class="section-heading">Research</h1>
+    <p class="intro">My research explores how to make performance engineering systematic, reusable, and accessible. Peer-reviewed papers are organized below by topic.</p>
+
+    <nav class="topic-nav" aria-label="Research topics">
+      <ul>
+        {topics.map(topic => <li><a href={`#${topic.id}`}>{topic.title}</a></li>)}
+      </ul>
+    </nav>
+
+    {topics.map(topic => (
+      <section class="research-topic" id={topic.id} aria-labelledby={`${topic.id}-heading`}>
+        <h2 id={`${topic.id}-heading`}>{topic.title}</h2>
+        {topic.papers.map(paper => (
+          <PublicationEntry {...paper} links={[
+            { label: 'Find on Google Scholar', href: `https://scholar.google.com/scholar?q=${encodeURIComponent(`"${paper.title}"`)}` },
+          ]} />
+        ))}
+      </section>
+    ))}
+  </div>
+</BaseLayout>
+
+<style>
+  .topic-nav { margin: 24px 0 34px; }
+  .topic-nav ul { padding-left: 20px; }
+  .topic-nav li { margin-bottom: 8px; }
+  .research-topic { border-top: 1px solid var(--rule); padding-top: 24px; margin-bottom: 36px; scroll-margin-top: 24px; }
+  .research-topic h2 { margin-bottom: 22px; font-size: 23px; }
+</style>

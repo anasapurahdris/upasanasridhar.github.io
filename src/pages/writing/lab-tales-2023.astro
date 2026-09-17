@@ -16,7 +16,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
     <h2>An accessible description of what I work on</h2>
     <p>Simple Writer wouldn’t let me use jargon such as “program” or “multiple,” so this was a little difficult. But I think the exercise was useful for distilling the work to its fundamentals. Personally, it made the process of writing less daunting.</p>
+    <figure class="simple-writer">
+      <a href={`${base}/writing/SimpleWriter.png`} aria-label="View the Simple Writer exercise at full size">
+        <img src={`${base}/writing/SimpleWriter.png`} width="2048" height="987" loading="lazy" alt="Simple Writer exercise comparing computers to kitchens: just as cooking improves with practice, writing fast code improves with experience. My research finds reusable steps and puts them together into a book." />
+      </a>
+      <figcaption>My research, explained using Simple Writer. Select the image to view it at full size.</figcaption>
+    </figure>
     <p>Without any restrictions, here’s what I work on in simple language:</p>
     <blockquote>High-performance computing is often gate-kept as an “art” that you have to be a natural at. But I strongly believe that it is a craft to be honed. There are certain techniques that you have in your arsenal, and you apply them as appropriate. My work is to identify general techniques and describe recipes for their application.</blockquote>
   </article>
 </BaseLayout>
+
+<style>
+  .simple-writer { margin: 24px 0; }
+  .simple-writer img { display: block; width: 100%; height: auto; }
+  .simple-writer figcaption { margin-top: 8px; color: var(--muted); font-size: 13px; }
+</style>
