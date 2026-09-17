@@ -8,6 +8,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h1 class="section-heading">Impact of Algorithm Choice</h1>
     <p class="post-date article-date">September 1, 2020</p>
     <p class="tag-list article-tags"><span class="tag">Algorithms</span><span class="tag">Performance</span></p>
+    <p><strong>Teaching note:</strong> A version of this webpage has been used in every offering of <em>CMU 18-645: How To Write Fast Code - I</em> since 2020.</p>
     <p>This page tests three variants of matrix–matrix multiplication and reports their execution times below.</p>
     <p>All three algorithms implement the same specification. Consider two matrices, A and B, with dimensions <em>M × K</em> and <em>K × N</em>, respectively. Their product, C, is computed by multiplying and adding the elements in each row of A with the elements in each column of B, producing <em>M × N</em> values.</p>
     <p>This gives us the familiar loop structure:</p>
