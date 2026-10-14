@@ -5,6 +5,27 @@ import PublicationEntry from '../components/PublicationEntry.astro';
 // Publication details transcribed from the CV in public/.
 const topics = [
   {
+    id: 'portable-libraries',
+    title: 'Portable Performance Libraries',
+    papers: [
+      {
+        title: 'Gen-AI in a Bottle: Experiments with LLMs to Generate HPC Kernels',
+        authors: 'Upasana Sridhar, Elliott Binder, and Tze Meng Low',
+        venue: 'IEEE IPDPS Workshops (IPDPSW)', year: 2025,
+      },
+      {
+        title: 'SMaLL: Software for Rapidly Instantiating Machine Learning Libraries',
+        authors: 'Upasana Sridhar, Nicholai Tukanov, Elliott Binder, Tze Meng Low, Scott McMillan, and Martin D. Schatz',
+        venue: 'ACM Transactions on Embedded Computing Systems (TECS)', year: 2024,
+      },
+      {
+        title: 'Reformulating the Direct Convolution for High-Performance Deep Learning Inference on ARM Processors',
+        authors: 'Sergio Barrachina, Adrián Castelló, Manuel F. Dolz, Tze Meng Low, Héctor Martínez, Enrique S. Quintana-Ortí, Upasana Sridhar, and Andrés E. Tomás',
+        venue: 'Journal of Systems Architecture (JSA)', year: 2023,
+      },
+    ],
+  },
+  {
     id: 'graph-algorithms',
     title: 'Provably Correct, High-Performance Graph Algorithms',
     papers: [
@@ -56,27 +77,7 @@ const topics = [
       },
     ],
   },
-  {
-    id: 'portable-libraries',
-    title: 'Portable Performance Libraries',
-    papers: [
-      {
-        title: 'Gen-AI in a Bottle: Experiments with LLMs to Generate HPC Kernels',
-        authors: 'Upasana Sridhar, Elliott Binder, and Tze Meng Low',
-        venue: 'IEEE IPDPS Workshops (IPDPSW)', year: 2025,
-      },
-      {
-        title: 'SMaLL: Software for Rapidly Instantiating Machine Learning Libraries',
-        authors: 'Upasana Sridhar, Nicholai Tukanov, Elliott Binder, Tze Meng Low, Scott McMillan, and Martin D. Schatz',
-        venue: 'ACM Transactions on Embedded Computing Systems (TECS)', year: 2024,
-      },
-      {
-        title: 'Reformulating the Direct Convolution for High-Performance Deep Learning Inference on ARM Processors',
-        authors: 'Sergio Barrachina, Adrián Castelló, Manuel F. Dolz, Tze Meng Low, Héctor Martínez, Enrique S. Quintana-Ortí, Upasana Sridhar, and Andrés E. Tomás',
-        venue: 'Journal of Systems Architecture (JSA)', year: 2023,
-      },
-    ],
-  },
+
 ];
 ---
 <BaseLayout title="Research — Upasana Sridhar" description="Papers on provably correct graph algorithms, the performance of abstractions, and portable performance libraries.">

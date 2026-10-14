@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { cvPath } from '../data/applicationMaterials';
 const meta = {
   title: 'Upasana Sridhar — Making performance engineering systematic, reusable, and accessible',
   description: 'Research portfolio: high-performance computing, programming languages, Performance Portability.'
@@ -17,7 +18,7 @@ const sitePath = (path: string) => `${base}${path}`;
       <div class="bio-copy">
         <h1 class="profile-name"><span>Upasana</span><span>Sridhar</span></h1>
         <p class="position">Final-year PhD Candidate<br />Electrical and Computer Engineering<br />Carnegie Mellon University</p>
-        <p class="bio-links"><a href={sitePath('/CV_Upasana_Spring26%20(17).pdf')}>CV</a> · <a href="mailto:upasanas@cmu.edu">Email</a> · <a href="https://scholar.google.com/scholar?q=Upasana+Sridhar" target="_blank" rel="noopener noreferrer">Google Scholar</a></p>
+        <p class="bio-links"><a href={sitePath(encodeURI(cvPath))}>CV</a> · <a href={sitePath('/application-materials/')}>Application Materials</a> · <a href="mailto:upasanas@cmu.edu">Email</a> · <a href="https://scholar.google.com/scholar?q=Upasana+Sridhar" target="_blank" rel="noopener noreferrer">Google Scholar</a></p>
       </div>
       <figure class="profile-photo">
         <img src={`${base}/profile.jpg`} alt="Upasana Sridhar standing in front of a mountain landscape" />

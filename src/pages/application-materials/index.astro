@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { applicationMaterials } from '../../data/applicationMaterials';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const materials = applicationMaterials.filter(({ path }) => path !== null);
+const pdfPath = (path: string) => `${base}${encodeURI(path)}`;
+const initial = materials[0];
+---
+<BaseLayout title="Application Materials — Upasana Sridhar" description="Academic application materials for faculty search committees.">
+  <section class="container section">
+    <h1 class="section-heading">Application Materials</h1>
+    <ul>
+      {materials.map(({ label, path }) => (
+        <li><a href={pdfPath(path!)} data-material-label={label}>{label}</a></li>
+      ))}
+    </ul>
+    <section aria-labelledby="selected-material-heading">
+      <h2 id="selected-material-heading" aria-live="polite">{initial.label}</h2>
+      <p><a id="selected-material-download" href={pdfPath(initial.path!)} download>Download {initial.label} (PDF)</a></p>
+      <iframe id="material-preview" class="article-pdf" src={`${pdfPath(initial.path!)}#pagemode=none`} title={`${initial.label} PDF`}>
+      </iframe>
+      <p>PDF not displaying? <a id="selected-material-open" href={pdfPath(initial.path!)}>Open {initial.label} directly</a>.</p>
+    </section>
+  </section>
+</BaseLayout>
+
+<script>
+  const preview = document.querySelector<HTMLIFrameElement>('#material-preview');
+  const heading = document.querySelector<HTMLHeadingElement>('#selected-material-heading');
+  const download = document.querySelector<HTMLAnchorElement>('#selected-material-download');
+  const direct = document.querySelector<HTMLAnchorElement>('#selected-material-open');
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-material-label]').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (!preview || !heading || !download || !direct) return;
+      event.preventDefault();
+      const label = link.dataset.materialLabel!;
+      preview.src = `${link.href}#pagemode=none`;
+      preview.title = `${label} PDF`;
+      heading.textContent = label;
+      download.href = link.href;
+      download.textContent = `Download ${label} (PDF)`;
+      direct.href = link.href;
+      direct.textContent = `Open ${label} directly`;
+    });
+  });
+</script>

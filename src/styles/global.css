@@ -13,12 +13,11 @@ body {
   margin: 0;
   background: #fff;
   color: var(--ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: 16px;
   line-height: 1.48;
   -webkit-font-smoothing: antialiased;
 }
-.home-page { font-family: var(--font-serif); }
 
 a { color: var(--link); text-decoration: none; }
 a:hover, a:focus { text-decoration: underline; }
@@ -27,6 +26,7 @@ img { max-width: 100%; }
 
 .site-header { border-bottom: 1px solid var(--rule); }
 .header-inner { padding: 13px 0 11px; }
+.primary-nav { font-family: var(--font-serif); }
 .primary-nav ul {
   display: flex;
   flex-wrap: wrap;
